@@ -16,11 +16,17 @@ function createNewBtns() {
     animalBtn.text(animals[i]);
 
     $("#buttons").append(animalBtn);
-
     }
 
 }
 
 
+$("#addbutton").on("click", function(event){
+    event.preventDefault();
 
+    var newAnimal = $("#addButtonText").val().trim();
 
+    animals.push(newAnimal);
+
+    createNewBtns();
+});
