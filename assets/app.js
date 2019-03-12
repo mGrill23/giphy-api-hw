@@ -1,25 +1,25 @@
-var queryUrl = "http://api.giphy.com/v1/gifs/random?q=" + searchQuery + "&api_key=WAXRpkX9VGr1jNv1fqExoE3TPhzI3JNM&limit=10";
-var searchQuery = "placeholder";
 var animals = ["birds", "cats", "dogs", "crabs", "emu", "snakes"];
 
 
-function createNewBtns() {
-
-    $("#buttons").clear();
-
-    for(var i = 0; i < animals.length; i++){
+function createNewBtns(arr) {
     
-    var animalBtn = $("<button").addClass(".animal-button");
+    $("#buttons").empty();
 
-    animalBtn.attr("data-animal", animals[i]);
+    for(var i = 0; i < arr.length; i++){
+    
+        var animalBtn = $("<button>").addClass(".animal-button");
 
-    animalBtn.text(animals[i]);
+        animalBtn.attr("data-animal", arr[i]);
 
-    $("#buttons").append(animalBtn);
+        animalBtn.text(arr[i]);
+
+        $("#buttons").append(animalBtn);
     }
 
 }
 
+// let be = document.getElementById('addbutton')
+// be.addEventListener('click', console.log('did this work?'))
 
 $("#addbutton").on("click", function(event){
     event.preventDefault();
@@ -28,10 +28,13 @@ $("#addbutton").on("click", function(event){
 
     animals.push(newAnimal);
 
-    createNewBtns();
+    createNewBtns(animals);
+    console.log('test click log')
 });
 
 $(".animal-button").on("click", function(){
+    var queryUrl = "http://api.giphy.com/v1/gifs/random?q=" + searchQuery + "&api_key=WAXRpkX9VGr1jNv1fqExoE3TPhzI3JNM&limit=10";
+
     var animal = $(this).attr("data-animal");
 
     searchQuery = animal;
