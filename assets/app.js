@@ -30,3 +30,40 @@ $("#addbutton").on("click", function(event){
 
     createNewBtns();
 });
+
+$(".animal-button").on("click", function(){
+    var animal = $(this).attr("data-animal");
+
+    searchQuery = animal;
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    }).then(function(response){
+        var results = response.data;
+
+          for (var i = 0; i < results.length; i++) {
+
+            if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+              
+              var gifDiv = $("<div>");
+
+              var rating = results[i].rating;
+
+              var p = $("<p>").text("Rating: " + rating);
+
+              var personImage = $("<img>");
+
+              
+              personImage.attr("src", results[i].images.fixed_height.url);
+
+              
+              gifDiv.append(p);
+              gifDiv.append(personImage);
+
+              
+              $("#gifs-here").prepend(gifDiv);
+            }
+        }
+    })
+})
